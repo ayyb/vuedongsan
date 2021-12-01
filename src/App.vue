@@ -5,20 +5,12 @@
       {{item}}
     </a>
   </div>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <div>
-    원룸샵
-    <h4 class="red" :style="red">XX 원룸</h4>
-    <p>{{price1}}만원</p>
-  </div>
-  <div>
-    <h4>XX 원룸</h4>
-    <p>{{price2}}만원</p>
-  </div>
-  <ul v-for="(item,index) in products" :key="index">
+  <div v-for="(item,i) in products" :key="i">
     <h4 :style="bold">{{item}}</h4>
     <p>{{price2}}만원</p>
-  </ul>
+    <button @click="increase(i)">허위매물 신고</button>
+    <span>신고수 : {{checkCount[i]}}</span>
+  </div>
 </div>
 </template>
 
@@ -32,11 +24,19 @@ export default {
       products: ['역삼동원룸','천호동원룸','마포구원룸'],
       red: 'color:red',
       bold: 'bold',
-      menu: ['Home','Shop','About']
+      menu: ['Home','Shop','About'],
+      checkCount: [0,0,0],
     }
   },
   components: {
-  }
+  },
+  methods: {
+    //증가함수
+    increase(i){
+      let number = i;
+      this.checkCount[number] += 1
+    }
+  },
 }
 </script>
 
