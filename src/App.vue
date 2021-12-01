@@ -6,10 +6,20 @@
     </a>
   </div>
   <div v-for="(item,i) in products" :key="i">
+    <img src="./assets/room0.jpg">
     <h4 :style="bold">{{item}}</h4>
     <p>{{price2}}만원</p>
     <button @click="increase(i)">허위매물 신고</button>
     <span>신고수 : {{checkCount[i]}}</span>
+    <button @click="modalOpen">상세페이지 보기</button>
+  </div>
+  <!-- 상세페이지 내용 -->
+  <div class="black-bg" v-if="modal">
+    <div class="white-bg">
+      <span @click="closeModal">닫기</span>
+      <h4>상세페이지</h4>
+      <p>상세페이지 내용</p>
+    </div>
   </div>
 </div>
 </template>
@@ -26,6 +36,7 @@ export default {
       bold: 'bold',
       menu: ['Home','Shop','About'],
       checkCount: [0,0,0],
+      modal :false,
     }
   },
   components: {
@@ -35,6 +46,12 @@ export default {
     increase(i){
       let number = i;
       this.checkCount[number] += 1
+    },
+    modalOpen(){
+      this.modal = true;
+    },
+    closeModal(){
+      this.modal = false;
     }
   },
 }
@@ -58,4 +75,20 @@ export default {
   color : white;
   padding : 10px;
 }
+body {
+  margin : 0;
+}
+div {
+  box-sizing: border-box;
+}
+.black-bg {
+  width: 100%; height:100%;
+  background: rgba(0,0,0,0.5);
+  position: fixed; padding: 20px;
+}
+.white-bg {
+  width: 100%; background: white;
+  border-radius: 8px;
+  padding: 20px;
+} 
 </style>
