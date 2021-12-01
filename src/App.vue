@@ -1,7 +1,11 @@
 <template>
 <div>
+  <div class="menu">
+    <a v-for="(item,index) in menu" :key="index">
+      {{item}}
+    </a>
+  </div>
   <img alt="Vue logo" src="./assets/logo.png">
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <div>
     원룸샵
     <h4 class="red" :style="red">XX 원룸</h4>
@@ -27,7 +31,8 @@ export default {
       price2 : 700,
       products: ['역삼동원룸','천호동원룸','마포구원룸'],
       red: 'color:red',
-      bold: 'bold'
+      bold: 'bold',
+      menu: ['Home','Shop','About']
     }
   },
   components: {
@@ -43,5 +48,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.menu {
+  background : darkslateblue;
+  padding : 15px;
+  border-radius : 5px;
+}
+.menu a {
+  color : white;
+  padding : 10px;
 }
 </style>
