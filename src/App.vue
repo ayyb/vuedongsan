@@ -5,16 +5,16 @@
       {{item}}
     </a>
   </div>
-  <div v-for="(item,i) in products" :key="i">
-    <img src="./assets/room0.jpg">
-    <h4 :style="bold">{{item}}</h4>
-    <p>{{price2}}만원</p>
+  <div v-for="(item,i) in dataList" :key="i">
+    <img :src="item.image">
+    <h4 :style="bold">{{item.title}}</h4>
+    <p>{{item.price}}</p>
     <button @click="increase(i)">허위매물 신고</button>
     <span>신고수 : {{checkCount[i]}}</span>
     <button @click="modalOpen">상세페이지 보기</button>
   </div>
   <!-- 상세페이지 내용 -->
-  <div class="black-bg" v-if="modal">
+  <div class="black-bg" v-if="modal == true">
     <div class="white-bg">
       <span @click="closeModal">닫기</span>
       <h4>상세페이지</h4>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import fakeData from './components/oneroom'
 export default {
   name: 'App',
   data(){
@@ -37,6 +38,7 @@ export default {
       menu: ['Home','Shop','About'],
       checkCount: [0,0,0],
       modal :false,
+      dataList : fakeData
     }
   },
   components: {
@@ -48,6 +50,7 @@ export default {
       this.checkCount[number] += 1
     },
     modalOpen(){
+      console.log('상세페이지 오픈')
       this.modal = true;
     },
     closeModal(){
