@@ -40,6 +40,12 @@ export default {
             // modal :false,
         }
     },
+    beforeUpdate(){
+    if(this.month == 2) {
+      alert('2개월은 너무 적습니다.')
+      this.month = 3;
+    }
+  },
     methods: {
     },
     
