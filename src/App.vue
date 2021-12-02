@@ -9,7 +9,7 @@
       {{item}}
     </a>
   </div>
-  <Card v-for="(item,i) in dataList" :key="i" :item="item"></Card>
+  <Card v-for="(item,i) in dataList" :key="i" :item="item" @openModal="modalOpen(i)"></Card>
 </div>
 </template>
 
