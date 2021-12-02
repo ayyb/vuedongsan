@@ -1,37 +1,23 @@
 <template>
 <div>
-  <!-- 상세페이지 내용 -->
-  <div class="black-bg" v-if="modal == true">
-    <div class="white-bg">
-      <!-- 상품명 -->
-      <h4>{{dataList[detailNumber].title}}</h4>
-      <!-- 상품설명 -->
-      <p>{{dataList[detailNumber].content}}</p>
-      <!-- 가격 -->
-      <p>{{dataList[detailNumber].price}}</p>
-      <!-- 이미지 -->
-      <img :src="dataList[detailNumber].image">
-      <span @click="closeModal">닫기</span>
-    </div>
-  </div>
+  <!--Discount배너-->
+  <Discount></Discount>
+  <Modal :dataList="dataList" :modal="modal" :detailNumber="detailNumber"></Modal>
+
   <div class="menu">
     <a v-for="(item,index) in menu" :key="index">
       {{item}}
     </a>
   </div>
-  <div v-for="(item,i) in dataList" :key="i">
-    <img :src="item.image">
-    <h4 :style="bold">{{item.title}}</h4>
-    <p>{{item.price}}</p>
-    <button @click="increase(i)">허위매물 신고</button>
-    <span>신고수 : {{checkCount[i]}}</span>
-    <button @click="modalOpen(i)">상세페이지 보기</button>
-  </div>
+  <Card v-for="(item,i) in dataList" :key="i" :item="item"></Card>
 </div>
 </template>
 
 <script>
 import fakeData from './components/oneroom'
+import Discount from './components/Discount.vue'
+import Modal from './components/Modal.vue'
+import Card from './Card.vue'
 export default {
   name: 'App',
   data(){
@@ -43,12 +29,15 @@ export default {
       bold: 'bold',
       menu: ['Home','Shop','About'],
       checkCount: [0,0,0],
-      modal :false,
       dataList : fakeData,
       detailNumber:'',
+      modal :false,
     }
   },
   components: {
+    Discount,
+    Modal,
+    Card
   },
   methods: {
     //증가함수
@@ -60,9 +49,6 @@ export default {
       this.detailNumber = i;
       this.modal = true;
     },
-    closeModal(){
-      this.modal = false;
-    }
   },
 }
 </script>
