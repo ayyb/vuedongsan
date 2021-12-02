@@ -11,5 +11,10 @@ export default {
 </script>
 
 <style>
-
+    .discount {
+        background: grey;
+        width: 100%; height:100%;
+        border-radius: 8px;
+        margin:auto;
+    }
 </style>

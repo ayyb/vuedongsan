@@ -2,15 +2,18 @@
   <!-- 상세페이지 내용 -->
   <div class="black-bg" v-if="modal == true">
     <div class="white-bg">
+      <!-- 이미지 -->
+      <img :src="dataList[detailNumber].image" style="width:500px">
       <!-- 상품명 -->
       <h4>{{dataList[detailNumber].title}}</h4>
       <!-- 상품설명 -->
       <p>{{dataList[detailNumber].content}}</p>
       <!-- 가격 -->
       <p>{{dataList[detailNumber].price}}</p>
-      <!-- 이미지 -->
-      <img :src="dataList[detailNumber].image" style="width:500px">
-      <span @click="closeModal">닫기</span>
+      <!-- <input @input="month= $evnet.target.value"> -->
+      <input v-model="month">
+      <p>{{month}}개월 선택함 : {{dataList[detailNumber].price * month}} 원</p>
+      <button @click="$emit('closeModal')">닫기</button>
     </div>
   </div>
 </template>
@@ -25,13 +28,11 @@ export default {
     },
     data(){
         return{
+            month: 0 
             // modal :false,
         }
     },
     methods: {
-        // closeModal(){
-        //   this.modal = false;
-        // }
     },
     
 }

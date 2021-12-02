@@ -2,7 +2,7 @@
 <div>
   <!--Discount배너-->
   <Discount></Discount>
-  <Modal :dataList="dataList" :modal="modal" :detailNumber="detailNumber"></Modal>
+  <Modal :dataList="dataList" :modal="modal" :detailNumber="detailNumber" @closeModal="closeModal()"></Modal>
 
   <div class="menu">
     <a v-for="(item,index) in menu" :key="index">
@@ -49,6 +49,9 @@ export default {
       this.detailNumber = i;
       this.modal = true;
     },
+    closeModal(){
+      this.modal = false;
+    }
   },
 }
 </script>
