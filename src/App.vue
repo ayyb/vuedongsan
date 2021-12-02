@@ -1,5 +1,19 @@
 <template>
 <div>
+  <!-- 상세페이지 내용 -->
+  <div class="black-bg" v-if="modal == true">
+    <div class="white-bg">
+      <!-- 상품명 -->
+      <h4>{{dataList[detailNumber].title}}</h4>
+      <!-- 상품설명 -->
+      <p>{{dataList[detailNumber].content}}</p>
+      <!-- 가격 -->
+      <p>{{dataList[detailNumber].price}}</p>
+      <!-- 이미지 -->
+      <img :src="dataList[detailNumber].image">
+      <span @click="closeModal">닫기</span>
+    </div>
+  </div>
   <div class="menu">
     <a v-for="(item,index) in menu" :key="index">
       {{item}}
@@ -11,15 +25,7 @@
     <p>{{item.price}}</p>
     <button @click="increase(i)">허위매물 신고</button>
     <span>신고수 : {{checkCount[i]}}</span>
-    <button @click="modalOpen">상세페이지 보기</button>
-  </div>
-  <!-- 상세페이지 내용 -->
-  <div class="black-bg" v-if="modal == true">
-    <div class="white-bg">
-      <span @click="closeModal">닫기</span>
-      <h4>상세페이지</h4>
-      <p>상세페이지 내용</p>
-    </div>
+    <button @click="modalOpen(i)">상세페이지 보기</button>
   </div>
 </div>
 </template>
@@ -38,7 +44,8 @@ export default {
       menu: ['Home','Shop','About'],
       checkCount: [0,0,0],
       modal :false,
-      dataList : fakeData
+      dataList : fakeData,
+      detailNumber:'',
     }
   },
   components: {
@@ -49,8 +56,8 @@ export default {
       let number = i;
       this.checkCount[number] += 1
     },
-    modalOpen(){
-      console.log('상세페이지 오픈')
+    modalOpen(i){
+      this.detailNumber = i;
       this.modal = true;
     },
     closeModal(){
@@ -87,7 +94,8 @@ div {
 .black-bg {
   width: 100%; height:100%;
   background: rgba(0,0,0,0.5);
-  position: fixed; padding: 20px;
+  position: fixed; 
+  padding: 20px;
 }
 .white-bg {
   width: 100%; background: white;
