@@ -2,6 +2,7 @@
   <div>
     <!--Discount배너-->
     <Discount></Discount>
+    할인율 : {{countNumber}} %
     <transition name="fade">
       <Modal
         :dataList="dataList"
@@ -45,7 +46,8 @@ export default {
       dataList: fakeData,
       detailNumber: "",
       modal: false,
-      dataListOrg: [...fakeData]
+      dataListOrg: [...fakeData],
+      countNumber: 40,
     };
   },
   components: {
@@ -53,7 +55,15 @@ export default {
     Modal,
     Card,
   },
+  mounted(){
+    this.init();
+  },
   methods: {
+    //1초마다 감소하는
+    init(){
+      setInterval(()=>{if(this.countNumber == 0) return false; this.countNumber--;  },100)
+    },
+
     //증가함수
     increase(i) {
       let number = i;
