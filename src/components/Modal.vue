@@ -26,6 +26,14 @@ export default {
         modal : Boolean,
         detailNumber : Number,
     },
+    watch:{
+        month(data){
+           if(isNaN(data) == true){
+               alert('문자열 입력하지마세요.');
+               this.month = 1;
+           }
+        }
+    },
     data(){
         return{
             month: 0 
